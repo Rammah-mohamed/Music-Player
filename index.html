@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
+  <title>Music Player</title>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <i class="fa-solid fa-chevron-down"></i>
+      <h3>Now playing</h3>
+      <i class="fa-solid fa-ellipsis"></i>
+    </header>
+    <div class="img-box">
+      <img src="#" alt="">
+    </div>
+    <div class="music-details">
+      <h3></h3>
+      <h4></h4>
+    </div>
+    <div class="progress-bar">
+      <div class="progress"></div>
+      <div class="time">
+        <span class="current"></span>
+        <span class="duration"></span>
+      </div>
+      <audio id="audio" src=""></audio>
+    </div>
+    <footer>
+      <div class="flow-box">
+        <i class="fa-solid fa-right-long flow show long"></i>
+      <i class="fa-solid fa-repeat flow repeat"></i>
+      <i class="fa-solid fa-shuffle shuffle"></i>
+      </div>
+      <div class="control">
+        <i class="fa-solid fa-backward-step prev"></i>
+        <div class="play-pause">
+          <i class="fa-solid fa-play play"></i>
+          <i class="fa-solid fa-pause pause"></i>
+        </div>
+        <i class="fa-solid fa-forward-step next"></i>
+      </div>
+      <i class="fa-solid fa-list list-icon"></i>
+    </footer>
+    <div class="music-list">
+      <header>
+        <div class="list">
+          <i class="fa-solid fa-list"></i>
+          <h4>Music List</h4>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
+      </header>
+      <div class="songs">
+      </div>
+    </div>
+  </div>
+
+  <script src="js/music.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
