@@ -1,4 +1,4 @@
-export const musicList = [
+export let musicList = [
 	{
 		artist: "Sia",
 		name: "Chandelier",
