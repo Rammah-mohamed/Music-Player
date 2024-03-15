@@ -1,8 +1,9 @@
 # Music-Player
-## Music Player Created With JavaScript, That It has these features: 
-#### 1- You can repeat or shuffle the songs.
-#### 2- You can get a random songs at any reload.
-#### 3- You can move the song to specific time.
-#### 4- You can get the next and previous song.
-#### 5- You have a songs list of all songs the you can change the specific song. 
+## Insides:
+ ####- Used EventListener type timeupdate and loadeddata to get the songs current time and duration and making a real time progress bar and song timing.
+ ####- Used Math object get a random index so the user can shuffle the songs.
+ ####- Used classList property to manipulate classes so the user can change the songs listing mode to repeat, shuffle or next.
+ ####- Used mouse event property offsetx to make a dynamic progress bar so the user can jump to any specific song duration.
+ ####- Used high order function forEach and template litrals to loop throught the songs date and inserting the DOM elements in the ui.
+ ####- Used If condtions and style property to apply the dark mode theme.
 ## The live app url is here:  https://rammah-mohamed.github.io/Music-Player .
