@@ -1,0 +1,375 @@
+:root {
+	--dark-blue: #1da369;
+	--light-blue: #1a5f7a;
+	--dark-sky: #159895;
+	--light-sky: #57c5b6;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: "Ubuntu", sans-serif;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 30px;
+	width: 100%;
+	height: 100vh;
+	background-color: var(--light-sky);
+}
+
+.wrapper {
+	position: relative;
+	background-color: #fff;
+	padding: 20px;
+	width: 400px;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 20px;
+	box-shadow: 10px 10px 20px rgb(0 0 0 / 40%);
+}
+
+.wrapper.bounce {
+	animation: bounce 1s infinite alternate ease-in-out;
+}
+
+@keyframes bounce {
+	50% {
+		transform: scale(1.01) translateY(-2px);
+	}
+
+	0%,
+	100% {
+		transform: scale(1) translateY(0);
+	}
+}
+
+.main-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.main-header i {
+	font-size: 20px;
+	color: var(--dark-sky);
+	cursor: pointer;
+}
+
+.main-header h2 {
+	position: relative;
+	left: 12px;
+	color: var(--dark-blue);
+}
+
+.main-header .mode {
+	height: 40px;
+	border: none;
+	border-radius: 10px;
+	padding: 10px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	background-color: var(--dark-sky);
+	color: white;
+}
+
+.img-box {
+	width: 100%;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+}
+
+.img-box img {
+	max-width: 100%;
+	object-fit: cover;
+	border-radius: 10px;
+}
+
+.music-details h3,
+.music-details h4 {
+	text-align: center;
+}
+
+.music-details h3 {
+	margin-bottom: 10px;
+	color: var(--dark-blue);
+}
+
+.music-details h4 {
+	color: var(--light-blue);
+}
+
+.progress-bar {
+	width: 100%;
+	height: 6px;
+	background-color: #ddd;
+	border-radius: 4px;
+	position: relative;
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+.progress-bar .time {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 20px;
+}
+
+.progress-bar .time span {
+	font-weight: 600;
+}
+
+.progress-bar .progress {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	border-radius: inherit;
+	background: linear-gradient(
+		to right,
+		var(--light-sky),
+		var(--dark-sky),
+		var(--light-blue),
+		var(--dark-blue)
+	);
+}
+
+.progress-bar .progress::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: -10px;
+	transform: translateY(-50%);
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: linear-gradient(
+		to left,
+		var(--light-sky),
+		var(--dark-sky),
+		var(--light-blue),
+		var(--dark-blue)
+	);
+}
+
+footer,
+footer .control {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+footer .control {
+	position: relative;
+	right: 10px;
+	width: 45%;
+}
+
+footer i {
+	font-size: 20px;
+	background: linear-gradient(
+		to bottom,
+		var(--light-sky),
+		var(--dark-sky),
+		var(--light-blue),
+		var(--dark-blue)
+	);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	border-radius: 50%;
+	padding: 5px;
+	cursor: pointer;
+	box-shadow: 3px 3px 8px rgb(0 0 0 / 30%);
+}
+
+footer .flow-box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 15px;
+}
+
+footer .flow {
+	display: none;
+}
+
+footer .flow.show {
+	display: block;
+}
+
+footer .play-pause {
+	background: linear-gradient(#f2f2f2, #e3e3e3);
+	border: 1px solid var(--light-sky);
+	color: #fff;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 5px 5px 10px rgb(0 0 0 / 40%);
+}
+
+footer .play-pause::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 40px;
+	height: 40px;
+	border-radius: inherit;
+	background: linear-gradient(
+		to bottom,
+		var(--light-sky),
+		var(--dark-sky),
+		var(--light-blue),
+		var(--dark-blue)
+	);
+	cursor: pointer;
+}
+
+.play-pause i {
+	position: relative;
+	left: 1px;
+	background-clip: unset;
+	-webkit-background-clip: unset;
+	-webkit-text-fill-color: unset;
+	background: transparent;
+	font-size: 18px;
+}
+
+.play-pause .play {
+	display: block;
+}
+
+.play-pause .pause {
+	display: none;
+}
+
+.play-pause.playing .play {
+	display: none;
+}
+
+.play-pause.playing .pause {
+	display: block;
+}
+
+footer .prev,
+footer .next {
+	font-size: 30px;
+}
+
+.music-list {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0px -5px 15px rgb(0 0 0 / 10%);
+	padding: 0 20px 20px;
+	max-height: 350px;
+	overflow-y: scroll;
+	opacity: 0;
+	transform: scale(0);
+	pointer-events: none;
+	transition: all 0.3s;
+}
+
+.music-list.show {
+	opacity: 1;
+	transform: scale(1);
+	pointer-events: unset;
+}
+
+.music-list::-webkit-scrollbar {
+	width: 0;
+}
+
+.list-header {
+	position: sticky;
+	left: 0;
+	top: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 20px;
+	z-index: 1;
+	background-color: #fff;
+}
+
+.list-header i {
+	font-size: 20px;
+	color: var(--dark-sky);
+}
+
+.list-header h4 {
+	color: var(--dark-blue);
+}
+
+.music-list .close {
+	cursor: pointer;
+}
+
+.music-list .list h4 {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.music-list .songs {
+	overflow: hidden;
+	background-color: transparent;
+}
+
+.music-list .song {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: transparent;
+	padding-bottom: 15px;
+	margin-bottom: 20px;
+	padding: 10px;
+	border-radius: 10px;
+	border-bottom: 1px solid var(--light-sky);
+	cursor: pointer;
+	user-select: none;
+}
+
+.music-list .song:last-child {
+	margin-bottom: 0;
+}
+
+.music-list .song.active {
+	background-color: #57c5b64f;
+}
+
+.music-list .song h4 {
+	margin-bottom: 5px;
+}
+
+.music-list .song h5 {
+	color: var(--dark-blue);
+}
+
+.music-list .song span {
+	font-weight: 600;
+	margin-left: 15px;
+}

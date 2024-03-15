@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap"
+			rel="stylesheet" />
+		<link rel="stylesheet" href="css/all.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>Music Player</title>
+	</head>
+	<body>
+		<h1>Music Player App</h1>
+		<div class="wrapper">
+			<header class="main-header">
+				<i class="fa-solid fa-rotate-right reload"></i>
+				<h2>Now playing</h2>
+				<button class="mode">Dark Mode</button>
+			</header>
+			<div class="img-box">
+				<img src="#" alt="" />
+			</div>
+			<div class="music-details">
+				<h3></h3>
+				<h4></h4>
+			</div>
+			<div class="progress-bar">
+				<div class="progress"></div>
+				<div class="time">
+					<span class="current"></span>
+					<span class="duration"></span>
+				</div>
+				<audio id="audio" src=""></audio>
+			</div>
+			<footer>
+				<div class="flow-box">
+					<i class="fa-solid fa-right-long flow show long"></i>
+					<i class="fa-solid fa-repeat flow repeat"></i>
+					<i class="fa-solid fa-shuffle shuffle"></i>
+				</div>
+				<div class="control">
+					<i class="fa-solid fa-backward-step prev"></i>
+					<div class="play-pause">
+						<i class="fa-solid fa-play play"></i>
+						<i class="fa-solid fa-pause pause"></i>
+					</div>
+					<i class="fa-solid fa-forward-step next"></i>
+				</div>
+				<i class="fa-solid fa-list list-icon"></i>
+			</footer>
+			<div class="music-list">
+				<header class="list-header">
+					<div class="list">
+						<i class="fa-solid fa-list"></i>
+						<h4>Music List</h4>
+					</div>
+					<i class="fa-solid fa-xmark close"></i>
+				</header>
+				<div class="songs"></div>
+			</div>
+		</div>
+		<h4>Made With Love By Dev.Rammah</h4>
+		<script src="js/music.js" type="module"></script>
+		<script src="js/script.js" type="module"></script>
+	</body>
+</html>
