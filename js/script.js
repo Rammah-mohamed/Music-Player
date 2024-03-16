@@ -1,5 +1,5 @@
-//getting the required elements
-let	wrapper = document.querySelector(".wrapper"),
+//Getting the required elements
+let wrapper = document.querySelector(".wrapper"),
 	imgTag = document.querySelector(".img-box img"),
 	songName = document.querySelector(".music-details h3"),
 	artist = document.querySelector(".music-details h4"),
@@ -26,59 +26,65 @@ import { musicList } from "./music.js";
 //Get Random song index
 let randomSongIndex = Math.floor(Math.random() * musicList.length);
 
-//get song data and insert it in the html elements
+//get song data for the song with the random index
 function getSongData(index) {
 	imgTag.src = `imgs/${musicList[index].src}.jpg`;
 	songName.textContent = musicList[index].name;
 	artist.textContent = musicList[index].artist;
 	audioTag.src = `music/${musicList[index].src}.mp3`;
-	getDuration(audioTag, "")
+	getDuration(audioTag, "");
 }
 
-// Get Song Duration
-function getDuration(audio,tag) {
+// 1- Get the current song duration
+// 2- Get the duration for the list songs
+// 3- Store the duration in the time attribute so it can be used later
+function getDuration(audio, tag) {
 	audio.addEventListener("loadeddata", () => {
 		let durationTime = audio.duration,
 			durationtMin = Math.floor(durationTime / 60),
 			durationSec = Math.floor(durationTime % 60);
-			if(tag === "") {
-				durationTag.textContent = `${durationtMin}:${durationSec < 10 ? "0" + durationSec : durationSec}`;
-			} else {
-				tag.textContent = `${durationtMin}:${durationSec < 10 ? "0" + durationSec : durationSec}`;
-				tag.setAttribute("time", tag.textContent)
-			}
+		if (tag === "") {
+			durationTag.textContent = `${durationtMin}:${
+				durationSec < 10 ? "0" + durationSec : durationSec
+			}`;
+		} else {
+			tag.textContent = `${durationtMin}:${durationSec < 10 ? "0" + durationSec : durationSec}`;
+			tag.setAttribute("time", tag.textContent);
+		}
 	});
 }
 
-//when the song is playing add movement to the progress bar and change the value of the current and duration
+// 1- Make a real time song duration and progress bar
+// 2- Check if the current song end (play the next song, repeat the current song or get a random song) depending on the current button type
 audioTag.addEventListener("timeupdate", (e) => {
 	current = e.target.currentTime;
 	duration = e.target.duration;
-	let	progress = (current / duration) * 100,
+	let progress = (current / duration) * 100,
 		currentMin = Math.floor(current / 60),
 		currentSec = Math.floor(current % 60);
 	progressBar.style.width = `${progress}%`;
 	currentTag.textContent = `${currentMin}:${currentSec < 10 ? "0" + currentSec : currentSec}`;
-		//if the song ended play the next one
-		let currentBtn = document.querySelector(".show");
-		if (currentBtn.classList.contains("long") && current === duration) {
-			nextBtn.click();
-		} else if (currentBtn.classList.contains("repeat") && current === duration) {
-			audioTag.currentTime = 0;
-			audioTag.play();
-		}
+
+	//Check the type of the current button
+	let currentBtn = document.querySelector(".show");
+	if (currentBtn.classList.contains("long") && current === duration) {
+		nextBtn.click();
+	} else if (currentBtn.classList.contains("repeat") && current === duration) {
+		audioTag.currentTime = 0;
+		audioTag.play();
+	}
 });
 
-// when the progress bar is click move the song to specific time
+// When the progress bar is clicked move the song to click position
 progressBar.parentElement.addEventListener("click", (e) => {
 	let progressBarWidth = progressBar.parentElement.clientWidth,
 		progressOffset = e.offsetX;
 	audioTag.currentTime = (progressOffset / progressBarWidth) * audioTag.duration;
 });
 
-//insert the songs in the list
+//Insert the songs in the songs list
 function insertSongs(list) {
-	list.forEach((song, index) => {	
+	list.forEach((song, index) => {
 		let songTag = `<div class="song" number=${index}>
 			<div class="info">
 				<h4>${song.name}</h4>
@@ -88,114 +94,117 @@ function insertSongs(list) {
 			<div>
 			<span class="${song.src} time-num"></span>
 			</div>
-		</div>`;	
-		songsBox.insertAdjacentHTML("beforeend", songTag)
+		</div>`;
+		songsBox.insertAdjacentHTML("beforebegin", songTag);
 		let songAudio = document.querySelector(`#${song.src}`),
-		songDurationTag = document.querySelector(`.${song.src}`);
-		// get the duration for each song
-		getDuration(songAudio, songDurationTag)
+			songDurationTag = document.querySelector(`.${song.src}`);
+		// Get the duration for each song in the list
+		getDuration(songAudio, songDurationTag);
 	});
 }
 insertSongs(musicList);
 
-//reload the page function
-let reloadIcon = document.querySelector(".reload")
-reloadIcon.addEventListener("click", e => {
+//Reload the page when
+let reloadIcon = document.querySelector(".reload");
+reloadIcon.addEventListener("click", (e) => {
 	window.location.reload();
-})
+});
 
-//dark mode function
+//Apply The Dark mode
 let modeBtn = document.querySelector(".mode"),
-songNameTag = document.querySelectorAll(".info h4"),
-timeTag = document.querySelectorAll(".time-num"),
-listHeader = document.querySelector(".list-header");
-modeBtn.addEventListener("click", e => {
-	let elements = [wrapper, musicListTag, listHeader, currentTag, durationTag]
+	songNameTag = document.querySelectorAll(".info h4"),
+	timeTag = document.querySelectorAll(".time-num"),
+	listHeader = document.querySelector(".list-header");
+modeBtn.addEventListener("click", (e) => {
 	e.stopPropagation();
+	let elements = [wrapper, musicListTag, listHeader, currentTag, durationTag];
 	if (modeBtn.textContent == "Dark Mode") {
 		modeBtn.textContent = "Ligth Mode";
-		elements.forEach(el => {
-			if(el.classList.contains("current") || el.classList.contains("duration")) {
-				el.style.color = "#FFF"
+		elements.forEach((el) => {
+			if (el.classList.contains("current") || el.classList.contains("duration")) {
+				el.style.color = "#FFF";
 			} else {
-				el.style.backgroundColor = "#222"
+				el.style.backgroundColor = "#222";
 			}
-		})
-		songNameTag.forEach(el => {
-			el.style.color = "#FFF"
-		})
-		timeTag.forEach(el => {
-			el.style.color = "#FFF"
-		})
+		});
+		songNameTag.forEach((el) => {
+			el.style.color = "#FFF";
+		});
+		timeTag.forEach((el) => {
+			el.style.color = "#FFF";
+		});
 	} else {
 		modeBtn.textContent = "Dark Mode";
-		elements.forEach(el => {
-			if(el.classList.contains("current") || el.classList.contains("duration")) {
-				el.style.color = "#222"
+		elements.forEach((el) => {
+			if (el.classList.contains("current") || el.classList.contains("duration")) {
+				el.style.color = "#222";
 			} else {
-				el.style.backgroundColor = "#FFF"
+				el.style.backgroundColor = "#FFF";
 			}
-		})
-		songNameTag.forEach(el => {
-			el.style.color = "#222"
-		})
-		timeTag.forEach(el => {
-			el.style.color = "#222"
-		})
+		});
+		songNameTag.forEach((el) => {
+			el.style.color = "#222";
+		});
+		timeTag.forEach((el) => {
+			el.style.color = "#222";
+		});
 	}
-})
+});
 
-//when the playlist icon clicked show the list (add show class)
+//When the playlist icon clicked show the songs list
 listIcon.addEventListener("click", () => {
 	musicListTag.classList.add("show");
 });
 
-// when the close button is clicked close the list (remove the show class)
+//When the close button is clicked close the songs list
 closeIcon.addEventListener("click", (e) => {
 	musicListTag.classList.remove("show");
 });
 
-//add active class to the song & apply click event
+//1- Add active class to the song
+//2- Get a song date that the user was clicked and set active class to it
 function setActiveSong(index) {
 	let songs = document.querySelectorAll(".song");
-	songs.forEach(s => {
-		s.classList.remove("active")
-		s.style.backgroundColor = "transparent"
-	})
+	songs.forEach((s) => {
+		s.classList.remove("active");
+		s.style.backgroundColor = "transparent";
+	});
 	songs[index].classList.add("active");
-	songs[index].style.backgroundColor = "#57c5b64f"
+	songs[index].style.backgroundColor = "#57c5b64f";
 	activeSongTime = document.querySelector(".active .time-num");
-	songs.forEach((song, index) => {
+	//Apply the click event to list songs
+	songs.forEach((song, id) => {
 		song.addEventListener("click", (e) => {
 			e.stopPropagation();
-			randomSongIndex = document.querySelector(".song.active").getAttribute("number");
+			let activeSongIndex = document.querySelector(".song.active").getAttribute("number");
 			activeSongTime.textContent = activeSongTime.getAttribute("time");
-			if(index !== +randomSongIndex) {
-				songs.forEach(s => {
-					s.classList.remove("active")
-					s.style.backgroundColor = "transparent"
-				})
-				getSongData(index);
-				songs[index].classList.add("active")
-				song.style.backgroundColor = "#57c5b64f"
+			if (id !== +activeSongIndex) {
+				songs.forEach((s) => {
+					s.classList.remove("active");
+					s.style.backgroundColor = "transparent";
+				});
+				//Set active class to the song that was clicked
+				songs[id].classList.add("active");
+				song.style.backgroundColor = "#57c5b64f";
+				getSongData(id);
 				activeSongTime = document.querySelector(".active .time-num");
-				
 			}
-			if(playPauseBtn.classList.contains("playing")) {
-				activeSongTime.textContent = "Playing"
+			//Auto play the current song
+			if (playPauseBtn.classList.contains("playing")) {
+				activeSongTime.textContent = "Playing";
 				audioTag.play();
-			} 
+			}
 		});
 	});
-};
+}
 
-// when the window load get the song data and active it
+// When the window get loaded insert a random song and set active class to it
 window.addEventListener("load", () => {
 	getSongData(randomSongIndex);
 	setActiveSong(randomSongIndex);
 });
 
-// when play Pause button click play and pause the song using playing class
+// when play Pause button was clicked play or stop the current song
 playPauseBtn.addEventListener("click", () => {
 	//check if the play pause button contains playing class
 	if (!playPauseBtn.classList.contains("playing")) {
@@ -207,15 +216,15 @@ playPauseBtn.addEventListener("click", () => {
 		wrapper.classList.remove("bounce");
 		playPauseBtn.classList.remove("playing");
 		audioTag.pause();
-		activeSongTime.textContent = activeSongTime.getAttribute("time")
+		activeSongTime.textContent = activeSongTime.getAttribute("time");
 	}
 });
 
-//switch between previous and next song
+//Switch between previous and next song
 function switchSong(button) {
 	button.addEventListener("click", () => {
 		activeSongTime.textContent = activeSongTime.getAttribute("time");
-		if(button == prevBtn) {
+		if (button == prevBtn) {
 			if (randomSongIndex > 0) {
 				randomSongIndex--;
 			} else {
@@ -225,37 +234,37 @@ function switchSong(button) {
 			if (randomSongIndex < musicList.length - 1) {
 				randomSongIndex++;
 			} else {
-				randomSongIndex = 0
+				randomSongIndex = 0;
 			}
 		}
 		getSongData(randomSongIndex);
 		setActiveSong(randomSongIndex);
-		if(playPauseBtn.classList.contains("playing")) {
-			activeSongTime.textContent = "Playing"
+		if (playPauseBtn.classList.contains("playing")) {
+			activeSongTime.textContent = "Playing";
 			audioTag.play();
 		}
-	})
+	});
 }
-switchSong(prevBtn)
-switchSong(nextBtn)
+switchSong(prevBtn);
+switchSong(nextBtn);
 
-//when shuffle button is click get a random song
+//When shuffle button was clicked get a random song
 shuffleBtn.addEventListener("click", () => {
 	let randomIndex = Math.floor(Math.random() * musicList.length);
-	while(randomIndex === randomSongIndex) {
+	while (randomIndex === randomSongIndex) {
 		randomIndex = Math.floor(Math.random() * musicList.length);
 	}
 	getSongData(randomIndex);
 	activeSongTime.textContent = activeSongTime.getAttribute("time");
-	setActiveSong(randomIndex)
+	setActiveSong(randomIndex);
 	randomSongIndex = randomIndex;
-	if(playPauseBtn.classList.contains("playing")) {
-		activeSongTime.textContent = "Playing"
+	if (playPauseBtn.classList.contains("playing")) {
+		activeSongTime.textContent = "Playing";
 		audioTag.play();
 	}
 });
 
-//when flow buttons  are clicked add hide class to the other buttons
+//When flow buttons were clicked change listening mode to(repeat, shuffle or next)
 flowBtns.forEach((btn, index) => {
 	btn.addEventListener("click", (e) => {
 		e.target.classList.remove("show");
