@@ -6,4 +6,4 @@
  #### - Used mouse event property offsetx to make a dynamic progress bar so the user can jump to any specific song duration.
  #### - Used high order function forEach and template litrals to loop throught the songs date and inserting the DOM elements in the ui.
  #### - Used If condtions and style property to apply the dark mode theme.
-## The live app url is here:  https://rammah-mohamed.github.io/Music-Player .
+## The live app url is here:  https://rammah-mohamed.github.io/Music-Player/ .
